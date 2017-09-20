@@ -162,6 +162,17 @@ const Game = function () {
             refreshDiv(gameData, gameDivs);   
         }  
     }
+
+    // 旋转
+    const rotate = () => {
+        // 先判断是否可以旋转
+        if(cur.canRotate(isValid)) {
+            clearData();
+            cur.rotate();
+            setData();
+            refreshDiv(gameData, gameDivs);   
+        } 
+    }
     // 初始化
     const init = (doms) => {
         gameDiv = doms.gameDiv;
@@ -182,5 +193,5 @@ const Game = function () {
     this.down = down;
     this.left = left;
     this.right = right;
-    
+    this.rotate = rotate;
 }

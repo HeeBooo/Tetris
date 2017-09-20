@@ -75,8 +75,9 @@ Square.prototype.right = function () {
     this.origin.y++;
 }
 // 旋转
-Square.prototype.canRoutate = function (isValid) {
-    let d = this.dir++;
+Square.prototype.canRotate = function (isValid) {
+    let d = this.dir + 1;
+    console.log(d);
     if(d == 4) {
         d = 0;
     };
@@ -92,4 +93,16 @@ Square.prototype.canRoutate = function (isValid) {
         }
     }
     return isValid(this.origin, temp);
+}
+// 旋转
+Square.prototype.rotate = function () {
+    this.dir = this.dir + 1;
+    if(this.dir == 4) {
+        this.dir = 0;
+    };
+    for(let i = 0; i < this.data.length; i++) {
+        for(let j = 0; j < this.data[0].length; j++) {
+            this.data[i][j] = this.rotates[this.dir][i][j];
+        }
+    }
 }

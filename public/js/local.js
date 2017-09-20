@@ -6,7 +6,7 @@ const Local = function () {
     let bindKeyEvent = () => {
         document.onkeydown = (e) => {
             if(e.keyCode == 38) { // up
-
+                game.rotate();
             } else if(e.keyCode == 39) { // right
                 game.right();
             } else if(e.keyCode == 40) { // down
