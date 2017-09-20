@@ -1,10 +1,10 @@
 const Square = function () {
-    // 下一个方块数据
+    // 方块数据
     this.data = [
-        [0, 2, 0, 0],
-        [0, 2, 0, 0],
-        [0, 2, 0, 0],
-        [0, 2, 0, 0]  
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]  
     ];
     // 原点
     this.origin = {
@@ -13,33 +13,7 @@ const Square = function () {
     };
     // 方向
     this.dir = 0;
-    // 旋转数组
-    this.rotates = [
-        [
-            [0, 2, 0, 0],
-            [0, 2, 0, 0],
-            [0, 2, 0, 0],
-            [0, 2, 0, 0]
-        ],
-        [
-            [0, 0, 0, 0],
-            [2, 2, 2, 2],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-        ],
-        [
-            [0, 2, 0, 0],
-            [0, 2, 0, 0],
-            [0, 2, 0, 0],
-            [0, 2, 0, 0]
-        ],
-        [
-            [0, 0, 0, 0],
-            [2, 2, 2, 2],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-        ]
-    ]
+
 }
 // 是否能够下移
 Square.prototype.canDown = function (isValid) {
@@ -76,11 +50,7 @@ Square.prototype.right = function () {
 }
 // 旋转
 Square.prototype.canRotate = function (isValid) {
-    let d = this.dir + 1;
-    console.log(d);
-    if(d == 4) {
-        d = 0;
-    };
+    let d = (this.dir + 1) % 4;
     let temp = [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
@@ -95,11 +65,13 @@ Square.prototype.canRotate = function (isValid) {
     return isValid(this.origin, temp);
 }
 // 旋转
-Square.prototype.rotate = function () {
-    this.dir = this.dir + 1;
-    if(this.dir == 4) {
-        this.dir = 0;
-    };
+Square.prototype.rotate = function (num) {
+    if(!num) {
+        num = 1;
+    }
+
+    this.dir = (this.dir + num) % 4;
+    
     for(let i = 0; i < this.data.length; i++) {
         for(let j = 0; j < this.data[0].length; j++) {
             this.data[i][j] = this.rotates[this.dir][i][j];

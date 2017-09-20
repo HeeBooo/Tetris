@@ -14,7 +14,7 @@ const Local = function () {
             } else if(e.keyCode == 37) { // left
                 game.left();
             } else if(e.keyCode == 32) { // space
-
+                game.fall();
             }
         }
     };

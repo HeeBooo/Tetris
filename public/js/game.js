@@ -138,7 +138,10 @@ const Game = function () {
             cur.down();
             setData();
             refreshDiv(gameData, gameDivs);   
-        }  
+            return true; //能坠落
+        } else {
+            return false;
+        }
     }
 
     // 左移
@@ -177,12 +180,10 @@ const Game = function () {
     const init = (doms) => {
         gameDiv = doms.gameDiv;
         nextDiv = doms.nextDiv;
-        cur = new Square();
-        next = new Square();
+        cur = SquareFactory.prototype.make(2, 2);
+        next = SquareFactory.prototype.make(3, 3)
         initDiv(gameDiv, gameData, gameDivs);
         initDiv(nextDiv, next.data, nextDivs);
-        cur.origin.x = 10;
-        cur.origin.y = 5;
         setData();
         refreshDiv(gameData, gameDivs);
         refreshDiv((next.data), nextDivs);
@@ -194,4 +195,7 @@ const Game = function () {
     this.left = left;
     this.right = right;
     this.rotate = rotate;
+    this.fall = () => {
+        while(down());
+    }
 }
