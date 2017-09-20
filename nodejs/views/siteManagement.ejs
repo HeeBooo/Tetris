@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>站点管理</title>
+    <link rel="stylesheet" href="../css/easyui.css">
+    <link rel="stylesheet" href="../css/siteManagement.css">
+</head>
+<body>
+<%- include('./menu', { currentMenu: curMenu, currentPage: curPage })%>
+
+<form action="">
+    <div class="site-option">
+        <div class="addSite">
+            <img src="../images/xinjian.png" alt="">
+            新建站点
+        </div>
+        <div class="import">
+            <img src="../images/import.png" alt="">
+            导入
+        </div>
+        <div class="export">
+            <img src="../images/export.png" alt="">
+            导出
+        </div>
+        <div class="model">
+            <img src="../images/download.png" alt="">
+            <a href="">下载模板</a>
+        </div>
+        <div class="country">
+            <select id="cc1" data-options="prompt:'行政区域(多选)'" class="easyui-combotree"></select>
+        </div>
+        <div class="siteType">
+            <select id="cc2" data-options="prompt:'站点类型(多选)'" class="easyui-combotree"></select>
+        </div>
+        <div class="inputBox">
+            <input id="keyword" type="text" placeholder="请输入站点名称或编号">
+        </div>
+        <div class="query" onclick="doFind(1)">
+            查询
+        </div>
+    </div>
+</form>
+<!--站点列表-->
+<table class="siteList" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>序号</th>
+        <th>站点名称</th>
+        <th>站点自编码</th>
+        <th>国家编码编号</th>
+        <th>站点类型</th>
+        <th>所属乡镇</th>
+        <th>安装时间</th>
+        <th>运行状态</th>
+        <th>运行时长</th>
+        <th>操作</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>大湾乡政府</td>
+        <td>876549876</td>
+        <td>876549876</td>
+        <td>自动雨量站</td>
+        <td>大湾乡</td>
+        <td>2016-10-02</td>
+        <td>正常</td>
+        <td>321天</td>
+        <td>
+            <a class="detail" onclick="openDetail()">详情</a>
+            <a class="edit" onclick="edit()">编辑</a>
+            <a class="delete" onclick="deleteSite(this)">删除</a>
+        </td>
+    </tr>
+</table>
+<div class="page">
+    <div class="detail">
+        共<span id="total">21</span>条数据，第<span id="pageNum">1</span>页/<span id="pageTotal">3</span>页
+    </div>
+    <ul class="pageNum">
+        <li><a href="" class="active">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">上一页</a></li>
+        <li><a href="">下一页</a></li>
+    </ul>
+</div>
+
+
+
+
+
+<!--遮罩-->
+<div class="shade"></div>
+<!--新建站点-->
+<div class="newSite">
+    <div class="title">
+        <span>新建站点</span>
+        <img src="../images/close1.png" alt="" class="close" onclick="closePopup()">
+    </div>
+    <form action="">
+        <div class="content">
+            <div class="content-item site-type">
+                <p class="stitle">站点类型</p>
+                <div class="site-box">
+                    <label ><img src="../images/checked.png" alt="" onclick="checkeBox(this)" ></label>
+                    <input type="radio" class="miss" name="site"> 自动雨量站
+                </div>
+                <div class="site-box">
+                    <label ><img src="../images/check.png" alt="" onclick="checkeBox(this)" ></label>
+                    <input type="radio" class="miss" name="site"> 自动水位站
+                </div>
+                <div class="site-box">
+                    <label ><img src="../images/check.png" alt="" onclick="checkeBox(this)" ></label>
+                    <input type="radio" class="miss" name="site"> 自动视频站
+                </div>
+                <div class="site-box">
+                    <label ><img src="../images/check.png" alt="" onclick="checkeBox(this)" ></label>
+                    <input type="radio" class="miss" name="site"> 自动水位雨量站
+                </div>
+                <div class="site-box">
+                    <label ><img src="../images/check.png" alt="" onclick="checkeBox(this)" ></label>
+                    <input type="radio" class="miss" name="site"> 简易雨量站
+                </div>
+                <div class="site-box">
+                    <label ><img src="../images/check.png" alt="" onclick="checkeBox(this)" ></label>
+                    <input type="radio" class="miss" name="site"> 简易水位站
+                </div>
+                <div class="site-box">
+                    <label ><img src="../images/check.png" alt="" onclick="checkeBox(this)" ></label>
+                    <input type="radio" class="miss" name="site"> LED预警屏
+                </div>
+                <div class="site-box">
+                    <label ><img src="../images/check.png" alt="" onclick="checkeBox(this)" ></label>
+                    <input type="radio" class="miss" name="site"> 无线预警广播
+                </div>
+                <div class="site-box">
+                    <p class="errorMsg"></p>
+                </div>
+            </div>
+            <div class="content-item">
+                <p class="stitle">基本信息</p>
+                <table class="base-information">
+                    <tr>
+                        <td>站点名称</td>
+                        <td><input type="text" placeholder="请输入站点名称" class="siteName"></td>
+                        <td>
+                            <p class="errorMsg"></p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>国家编码</td>
+                        <td><input type="text" placeholder="请输入国家编码" class="siteNum"></td>
+                        <td>
+                            <p class="errorMsg"></p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>安装时间</td>
+                        <td>
+                            <input type="text" placeholder="请输入安装时间" id="install-time" class="install-time">
+                            <img src="../images/rl.png" alt="" id="rl">
+                        </td>
+                        <td>
+                            <p class="errorMsg"></p>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>看护人员</td>
+                        <td><input type="text" placeholder="姓名" class="khName"></td>
+                        <td><input type="text" placeholder="电话" class="khNum"></td>
+                        <td><p class="errorMsg"></p></td>
+                    </tr>
+                    <tr>
+                        <td>安装地点</td>
+                        <td>
+                            <select name="" class="select1">
+                                <option value="">县</option>
+                                <option value="1">德昌县</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="" class="select2">
+                                <option value="">乡/镇</option>
+                                <option value="1">大湾村</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="详细地址" id="address"></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="addBtn">
+                <input type="button" value="确认添加" onclick="addSite()">
+            </div>
+        </div>
+    </form>
+</div>
+<!--站点详情-->
+<div class="siteDetail">
+    <div class="title">
+        <span>大湾乡政府自动雨量站</span>
+        <img src="../images/close1.png" alt="" class="close" onclick="closePopup()">
+    </div>
+    <div class="content">
+        <div class="content-item">
+            <p class="stitle">基本信息</p>
+            <table cellspacing="0" class="baseTable">
+                <tr>
+                    <td>站点编号: <span>1123654565</span></td>
+                    <td>站点名称: <span>大湾乡政府</span></td>
+                    <td>SIM卡号:  <span>13845622569</span></td>
+                    <td>安装时间: <span>2014-10-21</span></td>
+                    <td rowspan="3" class="zdpic">
+                        <img src="../images/noPic.png" alt="" onclick="openSitePic()">
+                    </td>
+                    <td rowspan="3" class="qrPicS">
+                        <img src="../images/zd6.png" alt="" onclick="openQrPic()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>国家编号: <span>1123654565</span></td>
+                    <td>站点地点: <span>大湾乡1组24号</span></td>
+                    <td>经&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度: <span>东经30.67°</span></td>
+                    <td>纬&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度: <span>北纬30.67°</span></td>
+                </tr>
+                <tr>
+                    <td>看护人员: <span>李大仁 13845622569</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="content-item">
+            <p class="stitle">资产信息</p>
+            <table cellspacing="0" class="siteInformation">
+                <tr>
+                    <th>设备名称</th>
+                    <th>品牌</th>
+                    <th>型号</th>
+                    <th>状态</th>
+                    <th>购买时间</th>
+                    <th>运行时间</th>
+                    <th>最近一次维护时间</th>
+                    <th>二维码</th>
+                </tr>
+                <tr>
+                    <td>RTU</td>
+                    <td>万江</td>
+                    <td>WJ-6000</td>
+                    <td>使用中</td>
+                    <td>2016-12-03</td>
+                    <td>112天</td>
+                    <td>2017-06-02</td>
+                    <!--<td class="more">-->
+                        <!--...-->
+                        <!--<div class="moreBox">-->
+                            <!--<img src="../images/sj.png" alt="">-->
+                            <!--<div class="line">分辨率</div>-->
+                            <!--<div>0.1</div>-->
+                        <!--</div>-->
+                    <!--</td>-->
+                    <td class="qrTd">
+                        <img src="../images/zd6.png" alt="" class="QR">
+                        <div class="Bqr">
+                            <img src="../images/DC1.jpg" alt="">
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>北斗</td>
+                    <td>无</td>
+                    <td>无</td>
+                    <td class="error">异常</td>
+                    <td>2016-12-03</td>
+                    <td>112天</td>
+                    <td>2017-06-02</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>太阳能电池板</td>
+                    <td>万江</td>
+                    <td>WJ-6000</td>
+                    <td>使用中</td>
+                    <td>2016-12-03</td>
+                    <td>112天</td>
+                    <td>2017-06-02</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>雨量桶</td>
+                    <td>万江</td>
+                    <td>WJ-6000</td>
+                    <td>使用中</td>
+                    <td>2016-12-03</td>
+                    <td>112天</td>
+                    <td>2017-06-02</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GPRS</td>
+                    <td>万江</td>
+                    <td>WJ-6000</td>
+                    <td class="error">异常</td>
+                    <td>2016-12-03</td>
+                    <td>112天</td>
+                    <td>2017-06-02</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>蓄电池</td>
+                    <td>万江</td>
+                    <td>WJ-6000</td>
+                    <td>使用中</td>
+                    <td>2016-12-03</td>
+                    <td>112天</td>
+                    <td>2017-06-02</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="content-item">
+            <p class="stitle">站点运行情况统计</p>
+            <div class="time all">
+                <p><span>1082</span>天</p>
+                <p>运行总时长</p>
+            </div>
+            <div class="time break">
+                <p><span>11</span>小时</p>
+                <p>运行总时长</p>
+            </div>
+            <div class="time allbreak">
+                <p><span>11</span>小时</p>
+                <p>运行总时长</p>
+            </div>
+            <div class="time health">
+                <p>100</p>
+                <p>健康度</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="content-item">
+            <p class="stitle">维护信息</p>
+            <div class="already">
+                <img src="../images/already2.png" alt="">
+                已维护 <span>5</span>次
+            </div>
+            <div class="whlist">
+                <table cellspacing="0" class="whInformation">
+                    <tr>
+                        <td>序号</td>
+                        <td>时间</td>
+                        <td>维护内容</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;" onclick="viewLog(this)">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>2016-12-29</td>
+                        <td>电池板异常</td>
+                        <td><a href="javascript:;">查看记录</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<!--查看记录-->
+<div class="viewLog">
+    <div class="title">
+        <span>大湾乡政府自动雨量站</span>
+        <img src="../images/return.png" alt="" class="return" onclick="returnTop()">
+    </div>
+    <div class="content">
+        <div class="content-item">
+            <p class="stitle">基本信息</p>
+            <table cellspacing="0">
+                <tr>
+                    <td>维护类型： <span>异常维护</span></td>
+                    <td>维护时间： <span>2016-15-25</span></td>
+                    <td>完成时间： <span>2016-15-25</span></td>
+                    <td>运维人员： <span>熊奇伟</span></td>
+                </tr>
+                <tr>
+                    <td>异常描述： <span>电池板异常</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="content-item">
+            <p class="stitle">运维路径</p>
+            <div class="lj">
+                <p>累计路程: <span>56</span>公里&nbsp;&nbsp;&nbsp;&nbsp;累计用时: <span>10</span>小时</p>
+                <img src="" alt="">
+            </div>
+        </div>
+        <div class="content-item">
+            <p class="stitle">
+                运维操作
+                <span class="imgTitle">运维后图片</span>
+                <span class="imgTitle">运维前图片</span>
+                <span class="processedStateTitle">处理完状态</span>
+                <span class="checkResultTitle">检查结果</span>
+            </p>
+            <div class="leftBox">
+                <div class="record-content">
+                    <p class="jlTitle"><img src="../images/zdxx.png" alt="">运维公司及人员</p>
+                    <p class="yw-content">1.成都英孚克斯科技有限公司</p>
+                    <p class="yw-content">2.熊启尾 —— 13682883746</p>
+                </div>
+                <div class="record-content">
+                    <p class="jlTitle"><img src="../images/zdxx.png" alt="">设备检查</p>
+                    <p class="yw-content">
+                        <span class="textContent">1.站点周围环境是否满足安装要求 —— 进行现场整改，不满足的进行修复不满足的进行修复不满足的进行修复</span>
+                        <span class="checkResult">符合要求</span>
+                        <span class="processedState">符合要求</span>
+                        <!--运维后照片-->
+                        <a class="cur">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                        </a>
+                        <!--运维前照片-->
+                        <a class="pre">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                        </a>
+
+
+
+                    </p>
+                    <p class="yw-content">
+                        <span class="textContent">2.接地扁铁生锈情况 —— 接地扁铁生锈严重，则用防锈漆修复</span>
+                        <span class="checkResult">符合要求</span>
+                        <span class="processedState">符合要求</span>
+                        <!--运维后照片-->
+                        <a class="cur">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                        </a>
+                        <!--运维前照片-->
+                        <a class="pre">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                        </a>
+                    </p>
+                    <p class="yw-content">
+                        <span class="textContent">3.检查站点接地螺栓是否紧固 —— 螺栓进行除锈后，进行紧固</span>
+                        <span class="checkResult">符合要求</span>
+                        <span class="processedState">符合要求</span>
+                        <!--运维后照片-->
+                        <a class="cur">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                        </a>
+                        <!--运维前照片-->
+                        <a class="pre">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                        </a>
+                    </p>
+                </div>
+                <div class="record-content">
+                    <p class="jlTitle"><img src="../images/zdxx.png" alt="">站点外观检查</p>
+                    <p class="yw-content">
+                        <span class="textContent">1.站点周围环境是否满足安装要求 —— 进行现场整改，不满足的进行修复不满足的进行修复不满足的进行修复</span>
+                        <span class="checkResult">符合要求</span>
+                        <span class="processedState">符合要求</span>
+                        <!--运维后照片-->
+                        <a class="cur">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                        </a>
+                        <!--运维前照片-->
+                        <a class="pre">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                            <img src="../images/small.png" alt="" onclick="openPre()">
+                        </a>
+                    </p>
+                </div>
+                <div class="record-content">
+                    <p class="jlTitle"><img src="../images/zdxx.png" alt="">站点测试</p>
+                    <p class="yw-content">
+                        <span class="zdtest">
+                            <span class="testType">雨量计分辨率</span>
+                            <span>—</span>
+                            <span class="testValue">0.5</span>
+                        </span>
+                        <!--运维后照片-->
+                        <a class="cur">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                            <img src="../images/small.png" alt="" onclick="openCur()">
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-item">
+            <p class="stitle">总结:</p>
+            <div class="content">
+                该站点承雨口易堵塞，整体情况良好，异常已处理成功
+            </div>
+        </div>
+        <!--<div class="cRepBox">-->
+            <!--<div class="createReport">-->
+                <!--生成运维报告-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+<!--编辑-->
+<div class="editBox">
+    <div class="title">
+        <span>大湾乡政府自动雨量站</span>
+        <img src="../images/close1.png" alt="" class="close" onclick="closePopup()">
+    </div>
+    <form action="">
+        <div class="content">
+            <div class="content-item">
+                <table class="base-information">
+                    <tr>
+                        <td>站点名称</td>
+                        <td><input type="text" placeholder="请输入站点名称" class="editSiteName"></td>
+                        <td>
+                            <p class="editErrorMsg"></p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>站点类型</td>
+                        <td>
+                            <select name="" id="">
+                                <option value="">自动雨量站</option>
+                            </select>
+                        </td>
+                        <td>
+                            <p class="editErrorMsg"></p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>国家编码</td>
+                        <td><input type="text" placeholder="请输入国家编码" class="editSiteNum"></td>
+                        <td>
+                            <p class="editErrorMsg"></p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>安装时间</td>
+                        <td>
+                            <input type="text" placeholder="请输入安装时间" id="edit-install-time" class="edit-install-time">
+                            <img src="../images/rl.png" alt="" id="edit-rl">
+                        </td>
+                        <td>
+                            <p class="editErrorMsg"></p>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>看护人员</td>
+                        <td><input type="text" placeholder="姓名" class="khName"></td>
+                        <td><input type="text" placeholder="电话" class="khNum"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>安装地点</td>
+                        <td>
+                            <select name="" class="editSelect1">
+                                <option value="">县</option>
+                                <option value="1">德昌县</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="" class="editSelect2">
+                                <option value="">乡/镇</option>
+                                <option value="1">大湾村</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="详细地址"></td>
+                    </tr>
+
+
+                </table>
+            </div>
+            <div class="addBtn">
+                <input type="button" value="保存" onclick="saveInf()">
+            </div>
+        </div>
+    </form>
+</div>
+<!--删除提示-->
+<div class="deletePrompt">
+    <div class="title">
+        <span>删除提示框</span>
+        <img src="../images/close1.png" alt="" class="close" onclick="closePopup()">
+    </div>
+    <div class="content">
+        <form action="">
+            <div class="content-item">
+                <p>确定要删除该站点吗？如要删除，请说明原因!</p>
+                <textarea name="" id="reason" placeholder="请输入原因"></textarea>
+            </div>
+            <div class="content-item">
+                <input type="button" value="提交审核" class="auditing" onclick="putAuditing()">
+            </div>
+        </form>
+    </div>
+</div>
+<!--提示-->
+<div class="prompt">
+    <div class="title">
+        <span>提示</span>
+        <img src="../images/close1.png" alt="" class="close" onclick="closePopup()">
+    </div>
+    <div class="content">
+        <div class="content-item">
+            <p>
+                <img src="../images/sh.png" alt="">
+                提交成功，审核通过后自动删除！
+            </p>
+        </div>
+    </div>
+</div>
+<!--成功框-->
+<div class="frame success">
+    <img src="../images/success1.png" alt="">
+    操作成功!
+</div>
+<!--失败框-->
+<div class="frame false">
+    <img src="../images/default.png" alt="">
+    操作失败!
+</div>
+<!--数据错误框-->
+<div class="frame wrong">
+    <img src="../images/wrong.png" alt="">
+    数据错误!
+</div>
+<!--删除确认框-->
+<div class="deleteBox">
+    <img src="../images/close1.png" alt="" class="close" onclick="closePopup()">
+    <p>确认删除？</p>
+    <div class="btnBox">
+        <input type="button" value="确认" onclick="confirmDelete()">
+        <input type="button" value="取消" onclick="closePopup()">
+    </div>
+</div>
+<div class="logOut">
+    <img src="../images/close1.png" alt="" class="close" onclick="closePopup()">
+    <p>确认退出？</p>
+    <div class="btnBox">
+        <input type="button" value="确认" onclick="">
+        <input type="button" value="取消" onclick="closePopup()">
+    </div>
+</div>
+<!--运维前大照片-->
+<a class="preBox">
+    <img src="../images/closeP.png" alt="" onclick="closeImg()">
+    <img src="../images/yw1.jpg" alt="">
+</a>
+<!--运维后照片-->
+<a class="curBox">
+    <img src="../images/closeP.png" alt="" onclick="closeImg()">
+    <img src="../images/ex.jpg" alt="">
+</a>
+<!--站点图片-->
+<a class="sitePic">
+    <img src="../images/closeP.png" alt="" onclick="closeImg()">
+    <img src="../images/ex.jpg" alt="">
+</a>
+<!--站点二维码-->
+<a class="qrPic">
+    <img src="../images/closeP.png" alt="" onclick="closeImg()">
+    <img src="../images/DC1.jpg" alt="">
+</a>
+<!--导入文件-->
+<div class="importSwipe">
+    <div class="title">
+        <span>导入</span>
+        <img src="../images/close1.png" alt="" class="close" onclick="closePopup()">
+    </div>
+    <div class="content">
+        <form action="" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>导入文件:</td>
+                    <td>
+                        <a class="importFile">
+                            <input type="file" name="fileField" class="file" id="fileField" size="28" onchange="import1(this)"/>
+                            <span>请导入.xlsx类型的文件</span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="addBtn">
+            <input type="button" value="保存" onclick="">
+        </div>
+    </div>
+
+</div>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/jquery.easyui.min.js"></script>
+<script src="../js/laydate.dev.js"></script>
+<script src="../js/siteManagement.js"></script>
+</body>
+</html>

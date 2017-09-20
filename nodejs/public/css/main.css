@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  background-color: red;
+}
+
+body h1 {
+  font-size: 28px;
+}

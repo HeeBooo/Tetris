@@ -1,0 +1,475 @@
+@charset "UTF-8";
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background-color: #072752;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #072752;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #47b8e3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background: url("../images/commonBg.png");
+  background-size: cover;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  height: 88px;
+  background-image: url("../images/top-.png");
+  background-repeat: no-repeat;
+  padding-left: 365px;
+}
+
+.header .nav {
+  margin: 0 auto;
+  list-style: none;
+}
+
+.header .nav > li {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.header .nav > li a {
+  display: block;
+  width: 86px;
+  height: 86px;
+  text-align: center;
+}
+
+.header .nav > li a img {
+  margin-top: 15px;
+  border: none;
+}
+
+.header .nav > li .item {
+  display: block;
+  width: 86px;
+  height: 86px;
+  text-align: center;
+}
+
+.header .nav > li .item img {
+  margin-top: 15px;
+  border: none;
+}
+
+.header .nav > li .item:before, .header .nav > li .item:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  z-index: -1;
+  -webkit-box-shadow: inset 0 0 0 2px #4ed0fe;
+          box-shadow: inset 0 0 0 2px #4ed0fe;
+  -webkit-animation: clipMe 8s linear infinite;
+          animation: clipMe 8s linear infinite;
+}
+
+.header .nav > li .item:before {
+  -webkit-animation-delay: -4s;
+          animation-delay: -4s;
+}
+
+@-webkit-keyframes clipMe {
+  0%, 100% {
+    clip: rect(0px, 86px, 2px, 0px);
+  }
+  25% {
+    clip: rect(0px, 2px, 86px, 0px);
+  }
+  50% {
+    clip: rect(84px, 86px, 86px, 0px);
+  }
+  75% {
+    clip: rect(0px, 86px, 86px, 84px);
+  }
+}
+
+@keyframes clipMe {
+  0%, 100% {
+    clip: rect(0px, 86px, 2px, 0px);
+  }
+  25% {
+    clip: rect(0px, 2px, 86px, 0px);
+  }
+  50% {
+    clip: rect(84px, 86px, 86px, 0px);
+  }
+  75% {
+    clip: rect(0px, 86px, 86px, 84px);
+  }
+}
+
+.header .other {
+  font-size: 14px;
+  margin-right: 20px;
+  color: #4ed0fe;
+}
+
+.header .other li {
+  list-style: none;
+  float: left;
+  padding: 34px 5px;
+}
+
+.header .other li:last-child {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.bg {
+  width: 100%;
+  height: 50px;
+  background-color: #081e4a;
+}
+
+.bg .submenu {
+  position: absolute;
+  list-style: none;
+  width: 100%;
+  text-align: center;
+}
+
+.bg .submenu li {
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 19px;
+}
+
+.bg .submenu li a {
+  display: block;
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+  color: #4ed0fe;
+  text-decoration: none;
+}
+
+.bg .submenu li.active {
+  border-bottom: 1px solid #fff;
+}
+
+.bg .submenu li.active a {
+  color: #fff;
+}
+
+.bg .submenu li:first-child {
+  margin-left: 0;
+}
+
+.bg .submenu li:last-child {
+  margin-right: 0;
+}
+
+#content .hide {
+  display: none;
+}
+
+.shade {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: black;
+  filter: alpha(opacity=60);
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9998;
+  display: none;
+}
+
+.deletePrompt, .prompt {
+  width: 680px;
+  height: 380px;
+  margin: -190px 0 0 -340px;
+  background-color: #031d4a;
+  clear: both;
+  z-index: 9999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: none;
+}
+
+.deletePrompt .title, .prompt .title {
+  padding: 0 40px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 14px;
+  color: #4ed0fe;
+  background-color: #0a315b;
+}
+
+.deletePrompt .title img, .prompt .title img {
+  width: 18px;
+  height: 18px;
+  float: right;
+  margin-top: 21px;
+  cursor: pointer;
+}
+
+.deletePrompt .content {
+  padding: 10px 40px;
+}
+
+.deletePrompt .content .content-item {
+  text-align: center;
+}
+
+.deletePrompt .content .content-item p {
+  margin: 20px 0;
+  font-size: 16px;
+  color: #4ed0fe;
+  text-align: left;
+}
+
+.deletePrompt .content .content-item #reason {
+  width: 600px;
+  height: 140px;
+  background-color: #102d5f;
+  border: 1px solid #264583;
+  color: #2e4c8d;
+  padding-left: 13px;
+  padding-top: 10px;
+  resize: none;
+}
+
+.deletePrompt .content .content-item .auditing {
+  width: 200px;
+  height: 50px;
+  background-color: #51d1ff;
+  color: #0d2251;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.prompt .content .content-item {
+  text-align: center;
+  font-size: 0;
+}
+
+.prompt .content .content-item p {
+  font-size: 16px;
+  color: #4ed0fe;
+  line-height: 320px;
+}
+
+.prompt .content .content-item p img {
+  vertical-align: top;
+  margin-top: 145px;
+  margin-right: 17px;
+}
+
+.frame {
+  width: 680px;
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  font-size: 20px;
+  background-color: #031d4a;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -340px;
+  display: none;
+  z-index: 9999;
+}
+
+.frame img {
+  vertical-align: top;
+  margin-top: 85px;
+  margin-right: 17px;
+}
+
+.false {
+  color: #ff6060;
+}
+
+.success {
+  color: #47e7da;
+}
+
+.wrong {
+  color: #ffc96b;
+}
+
+.deleteBox, .logOut {
+  width: 500px;
+  height: 230px;
+  text-align: center;
+  font-size: 20px;
+  background-color: #031d4a;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -115px 0 0 -250px;
+  display: none;
+  z-index: 9999;
+}
+
+.deleteBox img, .logOut img {
+  float: right;
+  margin-top: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.deleteBox p, .logOut p {
+  clear: both;
+  color: #fff;
+  line-height: 100px;
+}
+
+.deleteBox .btnBox, .logOut .btnBox {
+  font-size: 0;
+  text-align: center;
+}
+
+.deleteBox .btnBox input, .logOut .btnBox input {
+  width: 100px;
+  height: 50px;
+  background-color: #1879b9;
+  color: #fff;
+  border: 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.deleteBox .btnBox input:first-child, .logOut .btnBox input:first-child {
+  margin-right: 100px;
+}
+
+.page {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  margin-top: 10px;
+  font-size: 14px;
+  float: left;
+  margin-bottom: 40px;
+}
+
+.page .detail {
+  float: left;
+  margin-left: 25px;
+}
+
+.page .detail .showDataNum {
+  width: 50px;
+  height: 30px;
+  background-color: #011645;
+  color: #fff;
+}
+
+.page .pageNum {
+  float: left;
+  margin-left: 700px;
+}
+
+.page .pageNum li {
+  float: left;
+  list-style: none;
+  margin: 0 7px;
+}
+
+.page .pageNum li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.page .pageNum li .active {
+  text-decoration: underline;
+}
+
+/*修改easyui 样式*/
+.combo-arrow {
+  background: url("../images/select.png") no-repeat center center;
+}
+
+.combo-arrow:hover {
+  background-color: #011645;
+}
+
+.tree-expanded {
+  background: url("../images/tree_icons.png") no-repeat -18px 0px;
+}
+
+.tree-folder-open {
+  background: url("../images/tree_icons.png") no-repeat -224px 0;
+}
+
+.tree-checkbox0 {
+  background: url("../images/tree_icons.png") no-repeat -208px -18px;
+}
+
+.tree-checkbox1 {
+  background: url("../images/tree_icons.png") no-repeat -224px -18px;
+}
+
+.tree-file {
+  background: url("../images/tree_icons.png") no-repeat -240px 0;
+}
+
+.tree-collapsed {
+  background: url("../images/tree_icons.png") no-repeat 0px 0px;
+}
+
+.tree-folder {
+  background: url("../images/tree_icons.png") no-repeat -208px 0;
+}
+
+.tree-checkbox2 {
+  background: url("../images/tree_icons.png") no-repeat -240px -18px;
+}
+
+.combo-panel {
+  background-color: #011742;
+}
+
+.tree-title {
+  color: #fff;
+}
+
+.tree-node-selected {
+  background: #4976a8;
+}
+
+.tree-node-hover {
+  background: #4976a8;
+}

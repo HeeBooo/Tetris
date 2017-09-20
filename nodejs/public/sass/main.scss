@@ -1,0 +1,12 @@
+$color: red;
+
+* {
+  margin: 0;
+  padding: 0;
+  background-color: $color;
+}
+body {
+  h1 {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,46 @@
+
+<div class='header'>
+    <ul class="nav">
+        <% for (i in menus) {%>
+            <li> 
+                <% if(menus[i].firstMenu == currentMenu) { %>
+                    <a href='<%= menus[i].firstMenu %>' class='item' >
+                        <img src='<%= menus[i].imgSrc %>'>
+                    </a>   
+                <% } else { %>
+                    <a href='<%= menus[i].firstMenu %>'>
+                        <img src='<%= menus[i].imgSrc %>'>
+                    </a>  
+                <% } %>
+            </li>
+        <% } %>
+    </ul>
+    <ul class="other">
+        <li>你好,<span id="userName">admin</span></li>
+        <li>|</li>
+        <li>退出</li>
+    </ul>
+</div>
+<div class="bg">
+    <ul class="submenu">
+        <% for (i in menus) {%>
+            <% if(menus[i].firstMenu == currentMenu) { %>
+                <% menus[i].secMenu.forEach(function(item) { %>
+                    <% if(item.url == currentPage) { %>
+                        <li class='active'> 
+                            <a href='<%= item.url %>'>
+                                <%= item.title %>
+                            </a>
+                        </li>
+                    <% } else { %>
+                        <li> 
+                            <a href='<%= item.url %>'>
+                                <%= item.title %>
+                            </a>
+                        </li>
+                    <% } %>
+                <% }) %>
+            <% } %>    
+        <% } %>
+    </ul>
+</div>

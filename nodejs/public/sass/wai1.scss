@@ -1,0 +1,71 @@
+@import './common';
+
+
+#container {
+    height: 100%;
+    // padding-bottom: 5rem;
+}
+
+.anchorBL{
+    display:none;
+} 
+.info-box {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    width: 80%; 
+    height: 32rem;
+    margin: auto;
+    padding-top: 2.5rem;
+    border-radius: 0.5rem;
+    background-color: rgb(255, 255, 255);
+    z-index: 9999;
+    .close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.2rem;
+        color: rgb(102, 102, 102);
+        text-decoration: none;
+    }
+    figure {
+        text-align: center;
+        margin-bottom: 1rem;
+        figcaption {
+            font-size: 1.7rem;
+            margin-bottom: .5rem;
+        }
+        span {
+            font-size: 1.4rem;
+            color: rgb(153, 153, 153);
+            .iconfont {
+                margin-right: .5rem;
+                padding-left: 0;
+                font-size: 1.2rem;
+                color: rgb(183, 183, 183);
+            }
+        }
+    }
+    .time {
+        display: flex;
+        margin-bottom: 1.5rem;
+        p {
+            flex: 1;
+            text-align: center;
+            font-size: 1.7rem;
+            color: rgb(80, 197, 137)
+        }
+    }
+    .data {
+        padding: 0.6rem;
+        text-align: center;
+        font-size: 1.5rem;
+        color: rgb(102, 102, 102);
+    }
+    .danger {
+        color: rgb(255, 98, 86);
+    }
+}

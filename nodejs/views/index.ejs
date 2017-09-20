@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="loading">
+    <div class="pic">
+        <span></span>
+        <b>0%</b>
+    </div>
+</div>
+
+<h1 class='title'><%= title %></h1>
+<p><a href='/form'>发表新文章</a></p>
+<ul>
+    <% items.forEach(function (item) { %>
+        <li><%= item.title %></li>
+    <% }) %>
+</ul>
+
+<script src="/js/test.js"></script>
+</body>
+</html>
