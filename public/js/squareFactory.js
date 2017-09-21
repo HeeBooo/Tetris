@@ -261,6 +261,7 @@ SquareFactory.prototype.make = (index, dir) => {
         default:
             break;     
     }
+    // 定义源点
     s.origin.x = 0;
     s.origin.y = 3;
     s.rotate(dir);

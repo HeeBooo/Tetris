@@ -2,7 +2,11 @@ const Game = function () {
     // dom元素
     let gameDiv;
     let nextDiv;
-    
+    let timeDiv;
+    let scoreDiv;
+    let resultDiv;
+    // 分数
+    let score = 0;
     // 游戏矩阵
     let gameData = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -176,16 +180,134 @@ const Game = function () {
             refreshDiv(gameData, gameDivs);   
         } 
     }
+
+    // 方块移动到底部固定下来
+    const fixed = () => {
+        for(let i = 0 ; i < cur.data.length; i++) {
+            for(let j = 0; j < cur.data[0].length; j++) {
+                if(check(cur.origin, i, j)) {
+                    if(gameData[cur.origin.x + i][cur.origin.y + j] == 2) {
+                        // 固定方块
+                        gameData[cur.origin.x + i][cur.origin.y + j] = 1;
+                    }
+                }
+            }
+        }
+        refreshDiv(gameData, gameDivs);
+    }
+
+    // 使用下一个方块
+    const performNext = (type, dir) => {
+        cur = next;
+        setData();
+        next = SquareFactory.prototype.make(type, dir);
+        refreshDiv(gameData, gameDivs);
+        refreshDiv((next.data), nextDivs);
+    }
+
+    // 检查游戏结束
+    const checkGameOver = () => {
+        let gameOver = false;
+        for(let i = 0 ; i < gameData[0].length; i++) {
+            // 如果第二行是1了,就可以判断出不能生成下一个数据了
+            if(gameData[1][i] == 1) {
+                gameOver = true;
+            }
+        }
+        return gameOver;
+    }
+    // 消行
+    const checkClear = () => {
+        let line = 0;
+        // 从底部往上消除，上面的往下移一行，顶部填充一行0
+        for(let i = gameData.length - 1 ; i >= 0; i--) {
+            let clear = true;
+            for(let j = 0; j < gameData[0].length; j ++) {
+                // 如果这一行都不等于1就不能被消除
+                if(gameData[i][j] != 1) {
+                    clear = false;
+                    break;
+                }
+            }
+            // 循环完之后如果可以被消除，就消除这一行,上面的所有的都往下移一行
+            if(clear) {
+                line++;
+                for(let m = i; m > 0; m--) {
+                    for(let n = 0; n < gameData[0].length; n++) {
+                        gameData[m][n] = gameData[m-1][n];
+                    }
+                }
+                // 最顶部第一行全部变为0
+                for(let n = 0; n < gameData[0].length; n++) {
+                    gameData[0][n] = 0;
+                }
+                i++;
+            }
+        }
+        return line;
+    }
+    // 设置时间
+    const setTime = (time) => {
+        timeDiv.innerHTML = time;
+    }
+    // 加分
+    const addScore = (line) => {
+        let s = 0;
+        // 判断消的几行，1行10分，2行20分,3行60分，4行100分
+        switch (line) {
+            case 1:
+                s = 10;
+                break;
+            case 2:
+                s = 20;
+                break;
+            case 3:
+                s = 60;
+                break;
+            case 4:
+                s = 100;
+                break;
+            default:
+                break;
+        }
+        score += s;
+        scoreDiv.innerHTML= score;
+    }
+    // 游戏结束
+    const gameOver = (win) => {
+        if(win) {
+            resultDiv.innerHTML = '你赢了';
+        } else {
+            resultDiv.innerHTML = '你输了';
+        }
+    }
+    // 底部增加行
+    const addTailLines = (lines) => {
+        // 所有的方块行都往上移动
+        for(let i = 0 ; i < (gameData.length - lines.length); i++) {
+            // console.log(gameData[i+ lines.length])
+            gameData[i] = gameData[i + 1];
+        }
+        for(let i = 0 ; i < lines.length; i++) {
+            gameData[gameData.length - lines.length + i] = lines[i];
+        }
+        // 当前方框的位置也要移动
+        cur.origin.x = cur.origin.x - lines.length;
+        if(cur.origin.x < 0) {
+            cur.origin.x = 0;
+        }
+        refreshDiv(gameData, gameDivs);
+    }
     // 初始化
-    const init = (doms) => {
+    const init = (doms, type, dir) => {
         gameDiv = doms.gameDiv;
         nextDiv = doms.nextDiv;
-        cur = SquareFactory.prototype.make(2, 2);
-        next = SquareFactory.prototype.make(3, 3)
+        timeDiv = doms.timeDiv;
+        scoreDiv = doms.scoreDiv;
+        resultDiv = doms.resultDiv;
+        next = SquareFactory.prototype.make(type, dir);
         initDiv(gameDiv, gameData, gameDivs);
         initDiv(nextDiv, next.data, nextDivs);
-        setData();
-        refreshDiv(gameData, gameDivs);
         refreshDiv((next.data), nextDivs);
     }
 
@@ -198,4 +320,12 @@ const Game = function () {
     this.fall = () => {
         while(down());
     }
+    this.fixed = fixed;
+    this.performNext = performNext;
+    this.checkClear = checkClear;
+    this.checkGameOver = checkGameOver;
+    this.setTime = setTime;
+    this.addScore = addScore;
+    this.gameOver = gameOver;
+    this.addTailLines = addTailLines;
 }

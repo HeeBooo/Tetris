@@ -46,7 +46,7 @@ gulp.task('sass', () => {
 gulp.task('js', () => {
     return gulp.src('public/js/*.js')
         .pipe(babel({
-            presets: ["es2015"]
+            presets: ["env"]
         }))
         // .pipe(uglify())
         .pipe(rename({
