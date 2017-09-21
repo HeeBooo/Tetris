@@ -8,14 +8,30 @@
     <link rel="stylesheet" href="../css/game.min.css">
 </head>
 <body>
-    <div id="game" class="game"></div>
-    <div id="next" class="next"></div>
-    <div class="info">
-        <div>已用时: <span id="time">0</span>s</div>
-        <div>已得分: <span id="score">0</span>分</div>
-        <div id="gameover"> </div>
+    <div>请用方向键和空格键进行操作，上代表旋转，空格代表坠落</div>
+    <div id="local" class="square">
+        <div class="title">我的游戏区域</div>
+        <div id="local_game" class="game"></div>
+        <div id="local_next" class="next"></div>
+        <div class="info">
+            <div>已用时: <span id="local_time">0</span>s</div>
+            <div>已得分: <span id="local_score">0</span>分</div>
+            <div id="local_gameover"></div>
+        </div>
     </div>
-    <div id="test"></div>
+    
+    <div id="remote" class="square">
+        <div class="title">对方游戏区域</div>            
+        <div id="remote_game" class="game"></div>
+        <div id="remote_next" class="next"></div>
+        <div class="info">
+            <div>已用时: <span id="remote_time">0</span>s</div>
+            <div>已得分: <span id="remote_score">0</span>分</div>
+            <div id="remote_gameover"></div>
+            
+        </div>
+    </div>
+
     <script src="../js/square.min.js"></script>
     <script src="../js/squareFactory.min.js"></script>
     <script src="../js/game.min.js"></script>
@@ -23,4 +39,4 @@
     <script src="../js/remote.min.js"></script>
     <script src="../js/script.min.js"></script> 
 </body>
-</html>
+</html> 

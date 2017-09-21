@@ -216,6 +216,7 @@ const Game = function () {
         }
         return gameOver;
     }
+    
     // 消行
     const checkClear = () => {
         let line = 0;
@@ -246,6 +247,7 @@ const Game = function () {
         }
         return line;
     }
+
     // 设置时间
     const setTime = (time) => {
         timeDiv.innerHTML = time;

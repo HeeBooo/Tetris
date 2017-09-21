@@ -4,10 +4,18 @@
     box-sizing: border-box;
 }
 
+.square {
+    float: left;
+    width: 402px;
+    height: 602px;
+    .title {
+        margin: 20px auto;
+        font-size: 30px;
+    }
+}
 .game {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    position: relative;
+    float: left;
     width: 202px;
     height: 402px;
     background-color: #f2faff;
@@ -15,18 +23,18 @@
     // border-top: none;
 }
 .next {
-    position: absolute;
-    top: 10px;
-    left: 250px;
+    position: relative;
+    float: left;
     width: 82px;
     height: 82px;
+    margin-left: 40px;
     border: 1px solid blue;
     background-color: #f2faff;
 }
 .info {
-    position: absolute;
-    top: 100px;
-    left: 250px;
+    float: left;
+    margin-left: 40px;
+    margin-top: 10px;    
 }
 .none, .current, .done {
     position: absolute;

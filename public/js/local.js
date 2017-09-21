@@ -68,6 +68,7 @@ const Local = function () {
             timeCount = 0;
             time++;
             game.setTime(time);
+            // 每10S生成一行干扰
             if(time % 10 == 0) {
                 game.addTailLines(generataBottomLine(1))
             }
@@ -83,11 +84,11 @@ const Local = function () {
     // 开始方法
     let start = () => {
         let doms = {
-            gameDiv: document.getElementById('game'),
-            nextDiv: document.getElementById('next'),
-            timeDiv: document.getElementById('time'),
-            scoreDiv: document.getElementById('score'),
-            resultDiv: document.getElementById('gameover')
+            gameDiv: document.getElementById('local_game'),
+            nextDiv: document.getElementById('local_next'),
+            timeDiv: document.getElementById('local_time'),
+            scoreDiv: document.getElementById('local_score'),
+            resultDiv: document.getElementById('local_gameover')
         };
         game = new Game();
         game.init(doms, generateType(), generateDir());
