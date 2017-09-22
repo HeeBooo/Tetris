@@ -9,6 +9,7 @@
 </head>
 <body>
     <div>请用方向键和空格键进行操作，上代表旋转，空格代表坠落</div>
+    <div id="waiting"></div>
     <div id="local" class="square">
         <div class="title">我的游戏区域</div>
         <div id="local_game" class="game"></div>
@@ -32,6 +33,7 @@
         </div>
     </div>
 
+    <script src="../js/socket.io.js"></script>
     <script src="../js/square.min.js"></script>
     <script src="../js/squareFactory.min.js"></script>
     <script src="../js/game.min.js"></script>

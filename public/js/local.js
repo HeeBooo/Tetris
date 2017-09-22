@@ -1,4 +1,4 @@
-const Local = function () {
+const Local = function (socket) {
     // 游戏对象
     let game;
     // 时间间隔
@@ -14,14 +14,19 @@ const Local = function () {
         document.onkeydown = (e) => {
             if(e.keyCode == 38) { // up
                 game.rotate();
+                socket.emit('rotate');
             } else if(e.keyCode == 39) { // right
                 game.right();
+                socket.emit('right');
             } else if(e.keyCode == 40) { // down
                 game.down();
+                socket.emit('down');
             } else if(e.keyCode == 37) { // left
                 game.left();
+                socket.emit('left');
             } else if(e.keyCode == 32) { // space
                 game.fall();
+                socket.emit('fall');
             }
         }
     };
@@ -31,21 +36,33 @@ const Local = function () {
         if (!game.down()) {
             // 当在底部的时候方块固定下来
             game.fixed();
+            socket.emit('fixed');            
             // 消行并计算得分
             let line = game.checkClear();
             if(line != 0) {
                 game.addScore(line);
+                socket.emit('line', line);            
             }
             // 游戏结束
             let gameOver = game.checkGameOver();
             if(gameOver) {
                 game.gameOver(false);
+                document.getElementById('remote_gameover').innerHTML = '你赢了'
+                socket.emit('lose');
                 stop();
             } else {
+                let t = generateType();
+                let d =  generateDir();
                 // 下个方块的种类和旋转次数
-                game.performNext(generateType(), generateDir());
+                game.performNext(t, d);
+                socket.emit('next', {
+                    type: t,
+                    dir: d
+                });
             }
-        };
+        } else {
+            socket.emit('down');            
+        }
     };
 
     // 随机生成干扰行
@@ -68,10 +85,7 @@ const Local = function () {
             timeCount = 0;
             time++;
             game.setTime(time);
-            // 每10S生成一行干扰
-            if(time % 10 == 0) {
-                game.addTailLines(generataBottomLine(1))
-            }
+            socket.emit('time', time);
         }
     }
 
@@ -91,10 +105,23 @@ const Local = function () {
             resultDiv: document.getElementById('local_gameover')
         };
         game = new Game();
-        game.init(doms, generateType(), generateDir());
+        let type = generateType();
+        let dir =  generateDir();
+        game.init(doms, type, dir);
+        socket.emit('init', {
+            type: type,
+            dir: dir
+        });
         // 绑定键盘方向事件
         bindKeyEvent();
-        game.performNext(generateType(), generateDir());
+        let t = generateType();
+        let d =  generateDir();
+        game.performNext(t, d);
+        socket.emit('next', {
+            type: t,
+            dir: d
+        });
+
         timer = setInterval(move, INTERVAL)
     };
 
@@ -109,6 +136,16 @@ const Local = function () {
         document.onkeydown = null;
     }
 
-    // 导出
-    this.start = start;
+    // 接收到start时游戏开始
+    socket.on('start', () => {
+        document.getElementById('waiting').innerHTML = '';
+        start();
+    })
+
+    // 监听输
+    socket.on('lose', () => {
+        game.gameOver(true);
+        stop();
+    })
+
 }

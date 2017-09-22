@@ -48,68 +48,65 @@ app.use(express.static(path.join(__dirname, 'dist'))); // 配置静态文件
 // 路由
 app.use('/', routes);
 
+// 客户端计数
 let clientCount = 0;
 
+// 用于存储客户端socket
+let socketMap = {};
+
+// 绑定消息
+let bindListener = (socket, event) => {
+    socket.on(event, (data) => {
+        if (socket.clientNum % 2 == 0) {
+            // 给另外一个客户端发送初始化的消息
+            socketMap[socket.clientNum - 1].emit(event, data)
+        } else {
+            socketMap[socket.clientNum + 1].emit(event, data)            
+        }
+    });
+}
+
 io.on('connection', (socket) => {
-    clientCount++;
-    socket.nickname = `user${clientCount}`;
-
-    // emit发送数据
-    // on接收数据
-    // io.emit代表广播
-    io.emit('enter', `${socket.nickname} comes in`);
-
-    socket.on('message', (data) => {
-        io.emit('message', `${socket.nickname} says: ${data}`)
-    })
-
-    // 客户端断开链接
-    socket.on('disconnect', () => {
-        io.emit('leave', `${socket.nickname} left`);
-    })
-
-});
-
-
-fs.readFile('input.txt', (err, data) => {
-    if (err) {
-        return console.error(err);
+    clientCount = clientCount + 1;
+    socket.clientNum = clientCount;
+    socketMap[clientCount] = socket;
+    // 判断此时进来的是第一个人还是第二个人
+    if (clientCount % 2 == 1) {
+        socket.emit('waiting', 'waiting for another person');
     } else {
-        console.log(data.toString());
+        socket.emit('start');
+        socketMap[(clientCount - 1)].emit('start');
     }
+
+    // 接收初始化消息并向另一个客户端发送初始化消息
+    bindListener(socket, 'init');
+
+    // 接收初始化下一个方块消息并传递给另一个客户端
+    bindListener(socket, 'next');
+    bindListener(socket, 'rotate');
+    bindListener(socket, 'right');
+    bindListener(socket, 'left');
+    bindListener(socket, 'down');
+    bindListener(socket, 'fall');
+    bindListener(socket, 'fixed');
+    bindListener(socket, 'line');
+    bindListener(socket, 'time');
+    bindListener(socket, 'lose');
+    
+    socket.on('disconnect', () => {
+
+    })
+
 });
 
-// 创建eventEmitter对象
-const eventEmitter = new events.EventEmitter();
 
-eventEmitter.on('some_event', () => {
-    console.log('some_event 事件触发')
-})
-
-setTimeout(() => {
-    eventEmitter.emit('some_event');
-}, 1000)
-
-
-server.once('connection', function (stream) {
-    console.log('Ah, we have our first user!');
-});
-
-
-const parseURL = url.parse('http://www.baidu.com?name=barry');
-
-console.log(parseURL.protocol)
-console.log(parseURL.host)
-console.log(parseURL.query)
-
-
-let a = [1, 2, 3];
-let b = [...a];
-
-console.log(b)
-console.log(b[0])
-
-
+// fs.readFile('input.txt', (err, data) => {
+//     if (err) {
+//         return console.error(err);
+//     } else {
+//         console.log(data.toString());
+//     }
+// });
 
 
 
